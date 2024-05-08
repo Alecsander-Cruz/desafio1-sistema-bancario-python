@@ -10,10 +10,15 @@ class Account:
         self.withdrawals = []
 
     def deposit(self, value):
+
+        if value <= 0:
+            return 'Não é possível depositar menos do que R$ 0.01'
         
-        self.deposits.append(value)
-        self.balance += value
-        return f'\nSaldo: R$ {self.balance:10.2f}'
+        else:
+            self.deposits.append(value)
+            self.balance += value
+            return f'\nSaldo: R$ {self.balance:10.2f}'
+        
 
     def withdrawal(self, value):
         if(self.daily_withdrawals == 0):
@@ -24,7 +29,9 @@ class Account:
         
         elif value > self.balance:
             return f'\nSaldo insuficiente! Você só possui R$ {self.balance:10.2f} na conta.'
-        
+
+        elif value <= 0:
+            return 'Não é possível sacar um valor menor do que R$ 0.01'
         else:
             self.withdrawals.append(value)
             self.balance -=value
